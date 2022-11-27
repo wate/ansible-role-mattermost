@@ -1,0 +1,6 @@
+---
+- name: Service mattermost is active and enabled on system startup
+  ansible.builtin.systemd:
+    name: mattermost
+    state: started
+    enabled: true

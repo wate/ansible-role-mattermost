@@ -1,0 +1,15 @@
+---
+- name: Create/update setting file
+  ansible.builtin.template:
+    src: mattermost.j2
+    dest: /erc/mattermost/mattermost.conf
+    mode: "0644"
+- name: Add/update option setting
+  ansible.builtin.lineinfile:
+    path: /etc/mattermost/mattermost.conf
+    regexp: "^(#\\s+)?option_name="
+    line: option_name=option_value
+- name: Add/update custom setting
+  ansible.builtin.blockinfile:
+    path: /etc/mattermost/mattermost.conf
+    block: "{{ role_extra_cfg }}"

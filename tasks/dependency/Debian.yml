@@ -1,0 +1,4 @@
+---
+- name: Install mattermost dependency packages
+  ansible.builtin.apt:
+    name: "{{ role_dependency_packages }}"
