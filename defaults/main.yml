@@ -1,2 +1,2 @@
 ---
-# defaults file for mattermost
+mattermost_version: "7.5.1"

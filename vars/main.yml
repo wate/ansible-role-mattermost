@@ -1,2 +1,4 @@
 ---
-# vars file for mattermost
+mattermost_user: mattermost
+mattermost_home: /opt/mattermost
+mattermost_root: "{{ mattermost_home }}"
