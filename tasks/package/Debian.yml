@@ -22,6 +22,8 @@
     url: https://releases.mattermost.com/{{ mattermost_version }}/{{ mattermost_download_file }}.tar.gz
     dest: /usr/local/src/mattermost.tar.gz
     mode: "0644"
+  register: update_mattermost
+  notify: restart mattermost
 - name: Unarchive download file
   ansible.builtin.unarchive:
     src: /usr/local/src/mattermost.tar.gz
@@ -32,5 +34,4 @@
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
     remote_src: true
-  register: update_mattermost
-  notify: restart mattermost
+  changed_when: false

@@ -19,10 +19,3 @@
     - name: Set mattermost_file_public_link_salt variable
       ansible.builtin.set_fact:
         mattermost_file_public_link_salt: "{{ internal_token_result.stdout }}"
-- name: Add/update generated token file
-  ansible.builtin.template:
-    src: token.j2
-    dest: "{{ mattermost_home }}/config/file_public_link_salt"
-    mode: "0644"
-  vars:
-    token_value: "{{ mattermost_file_public_link_salt }}"

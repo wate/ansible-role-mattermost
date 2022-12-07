@@ -20,6 +20,7 @@
             path: "{{ mattermost_home }}/mattermost_db_init"
             state: touch
             mode: "0644"
+            access_time: preserve
             modification_time: preserve
         - name: Execute database migrate
           ansible.builtin.command:

@@ -1,4 +1,10 @@
 ---
+- name: Generate mattermost_file_public_link_salt token
+  ansible.builtin.import_tasks: setting/tokens/file_public_link_salt.yml
+  when: not mattermost_file_public_link_salt
+- name: Generate mattermost_sql_at_rest_encrypt_key token
+  ansible.builtin.import_tasks: setting/tokens/sql_at_rest_encrypt_key.yml
+  when: not mattermost_sql_at_rest_encrypt_key
 - name: Find platform task file
   ansible.builtin.set_fact:
     include_task_file: "{{ lookup('first_found', params, errors='ignore') }}"

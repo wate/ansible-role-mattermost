@@ -1,12 +1,32 @@
 ---
-- name: Set mattermost_file_public_link_salt variable
-  ansible.builtin.import_tasks: setting/token/file_public_link_salt.yml
-  when: not mattermost_file_public_link_salt
-- name: Set mattermost_sql_at_rest_encrypt_key variable
-  ansible.builtin.import_tasks: setting/token/sql_at_rest_encrypt_key.yml
-  when: not mattermost_sql_at_rest_encrypt_key
-
-
+- name: Add/update mattermost_file_public_link_salt token file
+  ansible.builtin.template:
+    src: token.j2
+    dest: "{{ mattermost_home }}/config/file_public_link_salt"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: "0644"
+  vars:
+    token_value: "{{ mattermost_file_public_link_salt }}"
+- name: Add/update generated token file
+  ansible.builtin.template:
+    src: token.j2
+    dest: "{{ mattermost_home }}/config/sql_at_rest_encrypt_key"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: "0644"
+  vars:
+    token_value: "{{ mattermost_sql_at_rest_encrypt_key }}"
+- name: Set token config variable
+  ansible.builtin.set_fact:
+    token_config:
+      SqlSettings:
+        AtRestEncryptKey: "{{ mattermost_sql_at_rest_encrypt_key }}"
+      FileSettings:
+        PublicLinkSalt: "{{ mattermost_file_public_link_salt }}"
+- name: Merge config variable
+  ansible.builtin.set_fact:
+    mattermost_cfg: "{{ mattermost_cfg | combine(token_config, recursive=True) }}"
 - name: Create/update Mattermost setting file
   ansible.builtin.template:
     src: config.json.j2

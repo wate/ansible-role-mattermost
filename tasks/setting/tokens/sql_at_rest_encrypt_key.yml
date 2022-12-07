@@ -19,10 +19,3 @@
     - name: Set mattermost_sql_at_rest_encrypt_key variable
       ansible.builtin.set_fact:
         mattermost_sql_at_rest_encrypt_key: "{{ internal_token_result.stdout }}"
-- name: Add/update generated token file
-  ansible.builtin.template:
-    src: token.j2
-    dest: "{{ mattermost_home }}/config/sql_at_rest_encrypt_key"
-    mode: "0644"
-  vars:
-    token_value: "{{ mattermost_sql_at_rest_encrypt_key }}"
