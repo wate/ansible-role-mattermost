@@ -1,11 +1,11 @@
 [Unit]
 Description=Mattermost
 After=network.target
-{% if mattermost_cfg[mattermost_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1'] -%}
-{% if mattermost_cfg[mattermost_mode]['db']['dialect'] == 'mysql' -%}
+{% if mattermost_db_cfg.host | default('localhost') in ['localhost', '127.0.0.1'] -%}
+{% if mattermost_db_cfg.type == 'mysql' -%}
 After=mysql.service
 BindsTo=mysql.service
-{% elif mattermost_cfg[mattermost_mode]['db']['dialect'] == 'postgres' -%}
+{% elif mattermost_db_cfg.type == 'postgres' -%}
 After=postgresql.service
 BindsTo=postgresql.service
 {% endif %}

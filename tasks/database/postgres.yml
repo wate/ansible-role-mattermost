@@ -1,0 +1,17 @@
+---
+- name: Install database adapter(postgreSQL)
+  ansible.builtin.apt:
+    name: python3-psycopg2
+- name: Setup database
+  become: true
+  become_user: postgres
+  block:
+    - name: Create database
+      community.postgresql.postgresql_db:
+        name: "{{ mattermost_db_cfg.name }}"
+        encoding: "{{ mattermost_db_cfg.charset | default('UTF8') }}"
+    - name: Create database user
+      community.postgresql.postgresql_user:
+        name: "{{ mattermost_db_cfg.user }}"
+        password: "{{ mattermost_db_cfg.password }}"
+        db: "{{ mattermost_db_cfg.name }}"

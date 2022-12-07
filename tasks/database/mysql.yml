@@ -1,0 +1,23 @@
+---
+- name: Install database adapter(MySQL)
+  ansible.builtin.apt:
+    name:
+      - mariadb-client
+      - mariadb-server
+      - libmariadb-dev
+      - python{{ ansible_facts.distribution_major_version is version('11', '>=') | ternary('3', '') }}-pymysql
+- name: Create database
+  community.mysql.mysql_db:
+    name: "{{ mattermost_db_cfg.name }}"
+    encoding: "{{ mattermost_db_cfg.charset | default('utf8mb4') }}"
+    login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
+- name: Create database user
+  community.mysql.mysql_user:
+    name: "{{ mattermost_db_cfg.user }}"
+    password: "{{ mattermost_db_cfg.password }}"
+    host: "{{ item }}"
+    priv: "{{ mattermost_db_cfg.name }}.*:ALL"
+    login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
+  loop:
+    - localhost
+    - 127.0.0.1

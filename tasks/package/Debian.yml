@@ -26,8 +26,11 @@
   ansible.builtin.unarchive:
     src: /usr/local/src/mattermost.tar.gz
     extra_opts:
-      - "--strip-components=1"
+      - --strip-components=1
+      - --exclude=config/config.json
     dest: "{{ mattermost_home }}"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
     remote_src: true
+  register: update_mattermost
+  notify: restart mattermost

@@ -1,9 +1,11 @@
 ---
-# - name: Restart mattermost
-#   ansible.builtin.systemd:
-#     state: restarted
-#     name: mattermost
-# - name: Reload mattermost
-#   ansible.builtin.systemd:
-#     state: reloaded
-#     name: mattermost
+- name: restart mattermost
+  ansible.builtin.systemd:
+    daemon_reload: true
+    state: restarted
+    name: mattermost
+- name: reload mattermost
+  ansible.builtin.systemd:
+    daemon_reload: true
+    state: reloaded
+    name: mattermost
