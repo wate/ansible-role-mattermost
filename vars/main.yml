@@ -3,5 +3,9 @@ mattermost_user: mattermost
 mattermost_home: /opt/mattermost
 mattermost_root: "{{ mattermost_home }}"
 
-mattermost_dsn: "{{ mattermost_db_cfg.type }}://{{ mattermost_db_cfg.user }}:{{ mattermost_db_cfg.password }}@{{ mattermost_db_cfg.host }}:{{ mattermost_db_cfg.port\
-  \ }}/{{ mattermost_db_cfg.name }}{{ '?' + mattermost_db_cfg.additional_params | join('&') if mattermost_db_cfg.additional_params | length > 0 else '' }}"
+mattermost_dsn: "\
+  {{ mattermost_db_cfg.type }}://\
+  {{ mattermost_db_cfg.user }}:{{ mattermost_db_cfg.password }}@\
+  {{ mattermost_db_cfg.host }}:{{ mattermost_db_cfg.port }}/{{ mattermost_db_cfg.name }}\
+  {{ '?' + mattermost_db_cfg.additional_params | join('&') if mattermost_db_cfg.additional_params | length > 0 else '' }}\
+  "

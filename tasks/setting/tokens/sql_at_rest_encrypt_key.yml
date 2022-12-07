@@ -1,0 +1,28 @@
+---
+- name: Check token file
+  ansible.builtin.stat:
+    path: "{{ mattermost_home }}/config/sql_at_rest_encrypt_key"
+  register: token_file_stat_result
+- name: Generate token
+  ansible.builtin.set_fact:
+    mattermost_sql_at_rest_encrypt_key: "{{ lookup('community.general.random_string', length=32) }}"
+  when: not token_file_stat_result.stat.exists
+- name: Get generated token
+  when: token_file_stat_result.stat.exists
+  block:
+    - name: Get generated token
+      ansible.builtin.command:
+        cmd: cat {{ mattermost_home }}/config/sql_at_rest_encrypt_key
+        removes: "{{ mattermost_home }}/config/sql_at_rest_encrypt_key"
+      register: internal_token_result
+      changed_when: false
+    - name: Set mattermost_sql_at_rest_encrypt_key variable
+      ansible.builtin.set_fact:
+        mattermost_sql_at_rest_encrypt_key: "{{ internal_token_result.stdout }}"
+- name: Add/update generated token file
+  ansible.builtin.template:
+    src: token.j2
+    dest: "{{ mattermost_home }}/config/sql_at_rest_encrypt_key"
+    mode: "0644"
+  vars:
+    token_value: "{{ mattermost_sql_at_rest_encrypt_key }}"

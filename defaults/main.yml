@@ -20,8 +20,22 @@ mattermost_db_cfg:
     - connect_timeout=10
     - binary_parameters=yes
 
-mattermost_sql_setting_at_rest_encrypt_key:
-mattermost_file_setting_public_link_salt:
+mattermost_file_public_link_salt:
+mattermost_sql_at_rest_encrypt_key:
+## -------------------
+## gfycatのAPIキー
+##
+## 詳細は以下のURLを参照
+## https://developers.gfycat.com/api/
+## -------------------
+mattermost_service_gfycat_api_key:
+## -------------------
+## gfycatのAPIシークレット
+##
+## 詳細は以下のURLを参照
+## https://developers.gfycat.com/api/
+## -------------------
+mattermost_service_gfycat_api_secret:
 ## -------------------------
 ## Mattermostの設定
 ## -------------------------
@@ -30,18 +44,18 @@ mattermost_cfg:
     SiteURL: ""
     WebsocketURL: ""
     LicenseFileLocation: ""
-    ListenAddress: "{{ mattermost_listen_address_host }}:{{ mattermost_listen_address_host }}"
+    ListenAddress: "{{ mattermost_listen_address_host }}:{{ mattermost_listen_address_port }}"
     ConnectionSecurity: ""
     TLSCertFile: ""
     TLSKeyFile: ""
     TLSMinVer: "1.2"
     TLSStrictTransport: false
     TLSStrictTransportMaxAge: 63072000
-    TLSOverwriteCiphers: {}
+    TLSOverwriteCiphers: []
     UseLetsEncrypt: false
     LetsEncryptCertificateCacheFile: ./config/letsencrypt.cache
     Forward80To443: false
-    TrustedProxyIPHeader: {}
+    TrustedProxyIPHeader: []
     ReadTimeout: 300
     WriteTimeout: 300
     IdleTimeout: 60
@@ -86,8 +100,8 @@ mattermost_cfg:
     WebsocketPort: 80
     WebserverMode: gzip
     EnableGifPicker: true
-    GfycatAPIKey: 2_KtH_W5
-    GfycatAPISecret: 3wLVZPiswc3DnaiaFoLkDvB4X0IV6CpMkj4tf2inJRsBY6-FnkT08zGmppWFgeof
+    GfycatAPIKey: "{{ mattermost_service_gfycat_api_key }}"
+    GfycatAPISecret: "{{ mattermost_service_gfycat_api_secret }}"
     EnableCustomEmoji: true
     EnableEmojiPicker: true
     PostEditTimeLimit: -1
@@ -150,7 +164,7 @@ mattermost_cfg:
     ExperimentalEnableAutomaticReplies: false
     LockTeammateNameDisplay: false
     ExperimentalPrimaryTeam: ""
-    ExperimentalDefaultChannels: {}
+    ExperimentalDefaultChannels: []
   ClientRequirements:
     AndroidLatestVersion: ""
     AndroidMinVersion: ""
@@ -159,18 +173,18 @@ mattermost_cfg:
   SqlSettings:
     DriverName: "{{ mattermost_db_cfg.type }}"
     DataSource: "{{ mattermost_dsn }}"
-    DataSourceReplicas: {}
-    DataSourceSearchReplicas: {}
+    DataSourceReplicas: []
+    DataSourceSearchReplicas: []
     MaxIdleConns: 20
     ConnMaxLifetimeMilliseconds: 3600000
     ConnMaxIdleTimeMilliseconds: 300000
     MaxOpenConns: 300
     Trace: false
-    AtRestEncryptKey: rbzk1hwyrz3umg3j4jjicno446y3ti7q
+    AtRestEncryptKey: "{{ mattermost_sql_at_rest_encrypt_key }}"
     QueryTimeout: 30
     DisableDatabaseSearch: false
     MigrationsStatementTimeoutSeconds: 100000
-    ReplicaLagSettings: {}
+    ReplicaLagSettings: []
   LogSettings:
     EnableConsole: true
     ConsoleLevel: INFO
@@ -221,7 +235,7 @@ mattermost_cfg:
     EnablePublicLink: false
     ExtractContent: true
     ArchiveRecursion: false
-    PublicLinkSalt: iyq9k15jni6cjdsrb4tt4c57jfpd94xt
+    PublicLinkSalt: "{{ mattermost_file_public_link_salt }}"
     InitialFont: nunito-bold.ttf
     AmazonS3AccessKeyId: ""
     AmazonS3SecretAccessKey: ""
@@ -302,7 +316,7 @@ mattermost_cfg:
     EnableThemeSelection: true
     DefaultTheme: default
     AllowCustomThemes: true
-    AllowedThemes: {}
+    AllowedThemes: []
   GitLabSettings:
     Enable: false
     Secret: ""
@@ -547,10 +561,10 @@ mattermost_cfg:
     AutomaticPrepackagedPlugins: true
     RequirePluginSignature: false
     MarketplaceURL: https://api.integrations.mattermost.com
-    SignaturePublicKeyFiles: {}
+    SignaturePublicKeyFiles: []
     ChimeraOAuthProxyURL: ""
   DisplaySettings:
-    CustomURLSchemes: {}
+    CustomURLSchemes: []
     ExperimentalTimezone: true
   GuestAccountsSettings:
     Enable: false
