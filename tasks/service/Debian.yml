@@ -1,5 +1,11 @@
 ---
-- name: Service mattermost is active and enabled on system startup
+- name: Create/update systemd unit file
+  ansible.builtin.template:
+    src: mattermost.service.j2
+    dest: /lib/systemd/system/mattermost.service
+    mode: "0644"
+  notify: restart mattermost
+- name: Service Mattermost is active and enabled on system startup
   ansible.builtin.systemd:
     name: mattermost
     state: started

@@ -1,4 +1,12 @@
 ---
-- name: Install mattermost dependency packages
-  ansible.builtin.apt:
-    name: "{{ role_dependency_packages }}"
+- name: Add Mattermost user
+  ansible.builtin.user:
+    name: "{{ mattermost_user }}"
+    system: true
+- name: Create install directory
+  ansible.builtin.file:
+    path: "{{ mattermost_home }}"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    state: directory
+    mode: "0755"

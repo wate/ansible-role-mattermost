@@ -1,4 +1,33 @@
 ---
-- name: Install mattermost packages
-  ansible.builtin.apt:
-    name: "{{ role_packages }}"
+- name: Get mattermost latest version
+  when: mattermost_version == 'latest'
+  block:
+    - name: get latest release
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/mattermost/mattermost-server/releases/latest
+        headers:
+          Accept: application/vnd.github+json
+      register: latest_releases
+    - name: set tbls_version variable
+      ansible.builtin.set_fact:
+        mattermost_version: "{{ latest_releases.json.tag_name[1:] }}"
+- name: Set variables
+  ansible.builtin.set_fact:
+    mattermost_download_file: mattermost-{{ mattermost_version }}-{{ ansible_facts['system'] | lower }}-{{ architecture_files[ansible_facts['architecture']] }}
+  vars:
+    architecture_files:
+      x86_64: amd64
+- name: Download archive file
+  ansible.builtin.get_url:
+    url: https://releases.mattermost.com/{{ mattermost_version }}/{{ mattermost_download_file }}.tar.gz
+    dest: /usr/local/src/mattermost.tar.gz
+    mode: "0644"
+- name: Unarchive download file
+  ansible.builtin.unarchive:
+    src: /usr/local/src/mattermost.tar.gz
+    extra_opts:
+      - "--strip-components=1"
+    dest: "{{ mattermost_home }}"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    remote_src: true

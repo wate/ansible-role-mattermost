@@ -16,15 +16,12 @@
 - name: Include dependency task
   ansible.builtin.import_tasks: dependency.yml
   tags: dependency
-- name: Include repository task
-  ansible.builtin.import_tasks: repository.yml
-  tags: repository
 - name: Include package task
   ansible.builtin.import_tasks: package.yml
   tags: package
-- name: Include setting task
-  ansible.builtin.import_tasks: setting.yml
-  tags: setting
-- name: Include service task
-  ansible.builtin.import_tasks: service.yml
-  tags: service
+# - name: Include setting task
+#   ansible.builtin.import_tasks: setting.yml
+#   tags: setting
+# - name: Include service task
+#   ansible.builtin.import_tasks: service.yml
+#   tags: service
