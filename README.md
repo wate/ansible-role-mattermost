@@ -23,11 +23,37 @@ Mattermostのバージョン
 
 ### `mattermost_db_cfg`
 
-データベースの設定
-
-### `mattermost_smtp_cfg`
-
-SMTPの設定
+データベースの設定  
+### Example  
+#### PostgreSQL  
+```yaml  
+mattermost_db_cfg:  
+type: postgres  
+host: localhost  
+port: 5432  
+name: mattermost_test  
+user: mmuser  
+password: mostest  
+encoding: utf8  
+additional_params:  
+- "sslmode=disable"  
+- "connect_timeout=10"  
+```  
+#### MySQL  
+```yaml  
+mattermost_db_cfg:  
+type: mysql  
+host: localhost  
+port: 3306  
+name: mattermost_test  
+user: mmuser  
+password: mostest  
+encoding: utf8mb4  
+collation: utf8mb4_general_ci  
+additional_params:  
+- "charset=utf8mb4"  
+- "writeTimeout=30s"  
+```
 
 ### `mattermost_file_public_link_salt`
 
