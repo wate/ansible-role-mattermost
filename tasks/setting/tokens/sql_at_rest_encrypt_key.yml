@@ -5,7 +5,7 @@
   register: token_file_stat_result
 - name: Generate token
   ansible.builtin.set_fact:
-    mattermost_sql_at_rest_encrypt_key: "{{ lookup('community.general.random_string', length=32) }}"
+    mattermost_sql_at_rest_encrypt_key: "{{ lookup('community.general.random_string', length=32, special=False) }}"
   when: not token_file_stat_result.stat.exists
 - name: Get generated token
   when: token_file_stat_result.stat.exists

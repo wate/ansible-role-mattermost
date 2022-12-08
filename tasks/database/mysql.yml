@@ -1,5 +1,5 @@
 ---
-- name: Install database dependency packages
+- name: Install database dependency packages(MariaDB)
   ansible.builtin.apt:
     name:
       - mariadb-client
@@ -10,6 +10,7 @@
   community.mysql.mysql_db:
     name: "{{ mattermost_db_cfg.name }}"
     encoding: "{{ mattermost_db_cfg.encoding | default('utf8mb4') }}"
+    collation: "{{ mattermost_db_cfg.collation | default('utf8mb4_general_ci') }}"
     login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
 - name: Create database user
   community.mysql.mysql_user:
