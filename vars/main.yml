@@ -2,6 +2,7 @@
 mattermost_user: mattermost
 mattermost_home: /opt/mattermost
 mattermost_root: "{{ mattermost_home }}"
+mattermost_config_dir: "{{ mattermost_home }}/config"
 
 mattermost_dsn: "\
   {{ mattermost_db_cfg.type }}://\

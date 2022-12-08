@@ -24,17 +24,6 @@ mattermost_db_cfg:
     - binary_parameters=yes
 
 ## -------------------
-## SMTPの設定
-## -------------------
-mattermost_smtp_cfg:
-  host: localhost
-  user: ""
-  password: ""
-  port: 10025
-  timeout: 10
-  connection_security: ""
-
-## -------------------
 ## 公開リンクのソルト設定
 ## -------------------
 mattermost_file_public_link_salt:
@@ -280,12 +269,12 @@ mattermost_cfg:
     ReplyToAddress: ""
     FeedbackOrganization: ""
     EnableSMTPAuth: false
-    SMTPUsername: "{{ mattermost_smtp_cfg.user }}"
-    SMTPPassword: "{{ mattermost_smtp_cfg.password }}"
-    SMTPServer: "{{ mattermost_smtp_cfg.host }}"
-    SMTPPort: "{{ mattermost_smtp_cfg.port }}"
-    SMTPServerTimeout: "{{ mattermost_smtp_cfg.timeout }}"
-    ConnectionSecurity: "{{ mattermost_smtp_cfg.connection_security }}"
+    SMTPUsername: ""
+    SMTPPassword: ""
+    SMTPServer: localhost
+    SMTPPort: "10025"
+    SMTPServerTimeout: 10
+    ConnectionSecurity: ""
     SendPushNotifications: true
     PushNotificationServer: https://push-test.mattermost.com
     PushNotificationContents: full

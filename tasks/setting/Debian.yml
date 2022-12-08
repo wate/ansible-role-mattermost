@@ -19,18 +19,18 @@
     token_value: "{{ mattermost_sql_at_rest_encrypt_key }}"
 - name: Set token config variable
   ansible.builtin.set_fact:
-    token_config:
+    mattermost_token_config:
       SqlSettings:
         AtRestEncryptKey: "{{ mattermost_sql_at_rest_encrypt_key }}"
       FileSettings:
         PublicLinkSalt: "{{ mattermost_file_public_link_salt }}"
 - name: Merge config variable
   ansible.builtin.set_fact:
-    mattermost_cfg: "{{ mattermost_cfg | combine(token_config, recursive=True) }}"
+    mattermost_cfg: "{{ mattermost_cfg | combine(mattermost_token_config, recursive=True) }}"
 - name: Create/update Mattermost setting file
   ansible.builtin.template:
     src: config.json.j2
-    dest: "{{ mattermost_home }}/config/config.json"
+    dest: "{{ mattermost_config_dir }}/config.json"
     mode: "0644"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"

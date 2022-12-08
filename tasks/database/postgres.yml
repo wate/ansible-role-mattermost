@@ -1,7 +1,10 @@
 ---
-- name: Install database adapter(postgreSQL)
+- name: Install database dependency packages
   ansible.builtin.apt:
-    name: python3-psycopg2
+    name:
+      - postgresql
+      - python3-psycopg2
+      - acl
 - name: Setup database
   become: true
   become_user: postgres
