@@ -9,7 +9,7 @@
 - name: Create database
   community.mysql.mysql_db:
     name: "{{ mattermost_db_cfg.name }}"
-    encoding: "{{ mattermost_db_cfg.charset | default('utf8mb4') }}"
+    encoding: "{{ mattermost_db_cfg.encoding | default('utf8mb4') }}"
     login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
 - name: Create database user
   community.mysql.mysql_user:

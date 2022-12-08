@@ -9,7 +9,7 @@
     - name: Create database
       community.postgresql.postgresql_db:
         name: "{{ mattermost_db_cfg.name }}"
-        encoding: "{{ mattermost_db_cfg.charset | default('UTF8') }}"
+        encoding: "{{ mattermost_db_cfg.encoding | default('UTF8') }}"
     - name: Create database user
       community.postgresql.postgresql_user:
         name: "{{ mattermost_db_cfg.user }}"

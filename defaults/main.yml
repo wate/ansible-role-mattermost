@@ -7,20 +7,40 @@ mattermost_version: latest
 mattermost_listen_address_host:
 mattermost_listen_address_port: 8065
 
+## -------------------
+## データベースの設定
+## -------------------
 mattermost_db_cfg:
   type: postgres
   host: localhost
   name: mattermost_test
   user: mmuser
   password: mostest
-  charset: utf8
-  port: 5432
+  encoding: utf8
+  # port: 5432
   additional_params:
     - sslmode=disable
     - connect_timeout=10
     - binary_parameters=yes
 
+## -------------------
+## SMTPの設定
+## -------------------
+mattermost_smtp_cfg:
+  host: localhost
+  user: ""
+  password: ""
+  port: 10025
+  timeout: 10
+  connection_security: ""
+
+## -------------------
+## 公開リンクのソルト設定
+## -------------------
 mattermost_file_public_link_salt:
+## -------------------
+## SQLの暗号化設定
+## -------------------
 mattermost_sql_at_rest_encrypt_key:
 ## -------------------
 ## gfycatのAPIキー
@@ -260,12 +280,12 @@ mattermost_cfg:
     ReplyToAddress: ""
     FeedbackOrganization: ""
     EnableSMTPAuth: false
-    SMTPUsername: ""
-    SMTPPassword: ""
-    SMTPServer: localhost
-    SMTPPort: "10025"
-    SMTPServerTimeout: 10
-    ConnectionSecurity: ""
+    SMTPUsername: "{{ mattermost_smtp_cfg.user }}"
+    SMTPPassword: "{{ mattermost_smtp_cfg.password }}"
+    SMTPServer: "{{ mattermost_smtp_cfg.host }}"
+    SMTPPort: "{{ mattermost_smtp_cfg.port }}"
+    SMTPServerTimeout: "{{ mattermost_smtp_cfg.timeout }}"
+    ConnectionSecurity: "{{ mattermost_smtp_cfg.connection_security }}"
     SendPushNotifications: true
     PushNotificationServer: https://push-test.mattermost.com
     PushNotificationContents: full

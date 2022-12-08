@@ -6,6 +6,11 @@ mattermost_root: "{{ mattermost_home }}"
 mattermost_dsn: "\
   {{ mattermost_db_cfg.type }}://\
   {{ mattermost_db_cfg.user }}:{{ mattermost_db_cfg.password }}@\
-  {{ mattermost_db_cfg.host }}:{{ mattermost_db_cfg.port }}/{{ mattermost_db_cfg.name }}\
+  {% if mattermost_db_cfg.type == 'postgres' -%}
+  {{ mattermost_db_cfg.host }}{{ ':' + mattermost_db_cfg.port if mattermost_db_cfg.port is defined else '' }}\
+  {% else -%}
+  tcp({{ mattermost_db_cfg.host }}{{ ':' + mattermost_db_cfg.port if mattermost_db_cfg.port is defined else '' }})\
+  {% endif -%}
+  /{{ mattermost_db_cfg.name }}\
   {{ '?' + mattermost_db_cfg.additional_params | join('&') if mattermost_db_cfg.additional_params | length > 0 else '' }}\
   "
