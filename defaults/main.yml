@@ -24,8 +24,8 @@ mattermost_listen_address_port: 8065
 ##   password: mostest
 ##   encoding: utf8
 ##   additional_params:
-##     - sslmode=disable
-##     - connect_timeout=10
+##     - "sslmode=disable"
+##     - "connect_timeout=10"
 ##  ```
 ##
 ## #### MySQL
@@ -41,8 +41,8 @@ mattermost_listen_address_port: 8065
 ##   encoding: utf8mb4
 ##   collation: utf8mb4_general_ci
 ##   additional_params:
-##     - charset=utf8mb4
-##     - writeTimeout=30s
+##     - "charset=utf8mb4"
+##     - "writeTimeout=30s"
 ## ```
 ## -------------------
 mattermost_db_cfg:
@@ -56,15 +56,16 @@ mattermost_db_cfg:
   encoding: utf8
   port: 5432
   additional_params:
-    - sslmode=disable
-    - connect_timeout=10
-## for MySQL
-# encoding: utf8mb4
-# collation: utf8mb4_general_ci
-# port: 3306
-# additional_params:
-#   - charset=utf8mb4,utf8
-#   - writeTimeout=30s
+    - "sslmode=disable"
+    - "connect_timeout=10"
+  ## for MySQL
+  # port: 3306
+  # additional_params:
+  #   - "charset=utf8mb4"
+  #   - "writeTimeout=30s"
+  # ### auto generate database setting for localhost
+  # encoding: utf8mb4
+  # collation: utf8mb4_general_ci
 
 ## -------------------
 ## 公開リンクのソルト設定
