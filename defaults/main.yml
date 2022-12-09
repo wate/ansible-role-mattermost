@@ -56,16 +56,16 @@ mattermost_db_cfg:
   encoding: utf8
   port: 5432
   additional_params:
-    - "sslmode=disable"
-    - "connect_timeout=10"
-  ## for MySQL
-  # port: 3306
-  # additional_params:
-  #   - "charset=utf8mb4"
-  #   - "writeTimeout=30s"
-  # ### auto generate database setting for localhost
-  # encoding: utf8mb4
-  # collation: utf8mb4_general_ci
+    - sslmode=disable
+    - connect_timeout=10
+#   ## for MySQL
+#   port: 3306
+#   additional_params:
+#     - "charset=utf8mb4"
+#     - "writeTimeout=30s"
+#   ### auto generate database setting for localhost
+#   encoding: utf8mb4
+#   collation: utf8mb4_general_ci
 
 ## -------------------
 ## 公開リンクのソルト設定

@@ -7,3 +7,5 @@ warn_list:
   - no-changed-when
   - no-handler
   - experimental
+exclude_paths:
+  - vars/main.yml
