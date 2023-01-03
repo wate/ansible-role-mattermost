@@ -13,7 +13,6 @@ exclude_paths:
 
 ## 無効にするルール
 skip_list:
-  ## ansible-lint default warning level
   - role-name
   - name[casing]
 
