@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: mattermost
   author: yoshiaki tanaka
-  description: Setup Mattermost
+  description: Setup Mattermost(work in progress)
   license: Apache
   min_ansible_version: "2.13"
   platforms:

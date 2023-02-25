@@ -1,7 +1,7 @@
 mattermost
 =================
 
-Setup Mattermost
+Setup Mattermost(work in progress)
 
 OS Platform
 -----------------
