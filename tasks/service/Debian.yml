@@ -6,7 +6,7 @@
     mode: "0644"
   notify: restart mattermost
 - name: Service Mattermost is active and enabled on system startup
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     name: mattermost
     state: started
     enabled: true
