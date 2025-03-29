@@ -13,12 +13,12 @@ BindsTo=postgresql.service
 
 [Service]
 Type=notify
-ExecStart={{ mattermost_home }}/bin/mattermost
+ExecStart={{ mattermost_root }}/bin/mattermost
 TimeoutStartSec=3600
 KillMode=mixed
 Restart=always
 RestartSec=10
-WorkingDirectory={{ mattermost_home }}
+WorkingDirectory={{ mattermost_root }}
 User={{ mattermost_user }}
 Group={{ mattermost_user }}
 LimitNOFILE=49152

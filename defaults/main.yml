@@ -20,8 +20,8 @@ mattermost_listen_address_port: 8065
 ##   host: localhost
 ##   port: 5432
 ##   name: mattermost_test
-##   user: mmuser
-##   password: mostest
+##   user: mattermost_test_user
+##   password: mattermost_test_password
 ##   encoding: utf8
 ##   additional_params:
 ##     - "sslmode=disable"
@@ -36,8 +36,8 @@ mattermost_listen_address_port: 8065
 ##   host: localhost
 ##   port: 3306
 ##   name: mattermost_test
-##   user: mmuser
-##   password: mostest
+##   user: mattermost_test_user
+##   password: mattermost_test_password
 ##   encoding: utf8mb4
 ##   collation: utf8mb4_general_ci
 ##   additional_params:
@@ -49,9 +49,9 @@ mattermost_db_cfg:
   ## mysql / postgres
   type: postgres
   host: localhost
-  name: mattermost_test
-  user: mmuser
-  password: mostest
+  name: mattermost
+  user: mattermost
+  password: mattermost_password
   ## for PostgreSQL
   encoding: utf8
   port: 5432

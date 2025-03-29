@@ -10,7 +10,7 @@
     system: true
 - name: Create install directory
   ansible.builtin.file:
-    path: "{{ mattermost_home }}"
+    path: "{{ mattermost_root }}"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_group }}"
     state: directory

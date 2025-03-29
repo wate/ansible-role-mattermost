@@ -4,7 +4,7 @@
     src: mattermost.service.j2
     dest: /lib/systemd/system/mattermost.service
     mode: "0644"
-  notify: restart mattermost
+  notify: Restart mattermost
 - name: Service Mattermost is active and enabled on system startup
   ansible.builtin.systemd_service:
     name: mattermost

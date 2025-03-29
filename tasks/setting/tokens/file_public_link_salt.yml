@@ -1,7 +1,7 @@
 ---
 - name: Check token file
   ansible.builtin.stat:
-    path: "{{ mattermost_home }}/config/file_public_link_salt"
+    path: "{{ mattermost_root }}/config/file_public_link_salt"
   register: token_file_stat_result
 - name: Generate token
   ansible.builtin.set_fact:
@@ -12,8 +12,8 @@
   block:
     - name: Get generated token
       ansible.builtin.command:
-        cmd: cat {{ mattermost_home }}/config/file_public_link_salt
-        removes: "{{ mattermost_home }}/config/file_public_link_salt"
+        cmd: cat {{ mattermost_root }}/config/file_public_link_salt
+        removes: "{{ mattermost_root }}/config/file_public_link_salt"
       register: internal_token_result
       changed_when: false
     - name: Set mattermost_file_public_link_salt variable
