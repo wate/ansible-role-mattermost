@@ -2,7 +2,7 @@
 - name: Add/update mattermost_file_public_link_salt token file
   ansible.builtin.template:
     src: token.j2
-    dest: "{{ mattermost_home }}/config/file_public_link_salt"
+    dest: "{{ mattermost_root }}/config/file_public_link_salt"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
     mode: "0644"
@@ -11,7 +11,7 @@
 - name: Add/update generated token file
   ansible.builtin.template:
     src: token.j2
-    dest: "{{ mattermost_home }}/config/sql_at_rest_encrypt_key"
+    dest: "{{ mattermost_root }}/config/sql_at_rest_encrypt_key"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
     mode: "0644"
@@ -34,4 +34,4 @@
     mode: "0644"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
-  notify: restart mattermost
+  notify: Restart mattermost

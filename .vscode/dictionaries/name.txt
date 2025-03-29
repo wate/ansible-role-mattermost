@@ -1,0 +1,12 @@
+direnv
+dotenv
+geerlingguy
+gfycat
+gnupg
+letsencrypt
+mariadb
+mattermost
+mssql
+mysql
+postgres
+postgresql

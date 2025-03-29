@@ -1,13 +1,19 @@
 ---
+## ---------
 ## @see https://ansible-lint.readthedocs.io/configuring/
+## ---------
+
+## min, basic, moderate,safety, shared, production
+# profile: null
+
 use_default_rules: true
 
 ## 除外するディレクトリ/ファイル
-exclude_paths:
-  - .cache/
-  - .github/
-  - .devcontainer/
-  - vars/main.yml
+# exclude_paths:
+#   - .cache/
+#   - .github/
+#   - .devcontainer/
+#   - tests/
 
 ## @see https://ansible-lint.readthedocs.io/rules/
 

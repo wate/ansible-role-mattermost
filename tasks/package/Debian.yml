@@ -8,17 +8,17 @@
           Accept: application/vnd.github+json
     - name: Merge Github API Authorization request header
       ansible.builtin.set_fact:
-        github_api_request_headers: "{{ github_api_request_headers | combine(merge_reauest_header) }}"
+        github_api_request_headers: "{{ github_api_request_headers | combine(merge_request_header) }}"
       vars:
-        merge_reauest_header:
+        merge_request_header:
           Authorization: Bearer {{ lookup('env', 'GITHUB_TOKEN') }}
       when: lookup('env', 'GITHUB_TOKEN') | length > 0
-    - name: get latest release
+    - name: Get latest release
       ansible.builtin.uri:
         url: https://api.github.com/repos/mattermost/mattermost-server/releases/latest
         headers: "{{ github_api_request_headers }}"
       register: latest_releases
-    - name: set mattermost_version variable
+    - name: Set mattermost_version variable
       ansible.builtin.set_fact:
         mattermost_version: "{{ latest_releases.json.tag_name[1:] }}"
 - name: Set variables
@@ -33,14 +33,14 @@
     dest: /usr/local/src/mattermost.tar.gz
     mode: "0644"
   register: update_mattermost
-  notify: restart mattermost
+  notify: Restart mattermost
 - name: Unarchive download file
   ansible.builtin.unarchive:
     src: /usr/local/src/mattermost.tar.gz
     extra_opts:
       - --strip-components=1
       - --exclude=config/config.json
-    dest: "{{ mattermost_home }}"
+    dest: "{{ mattermost_root }}"
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
     remote_src: true

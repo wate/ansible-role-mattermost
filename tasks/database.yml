@@ -2,7 +2,7 @@
 - name: Include database setup task
   when: mattermost_db_cfg.host in ['localhost', '127.0.0.1']
   block:
-    - name: Setup databse
+    - name: Setup database
       ansible.builtin.include_tasks: database/{{ mattermost_db_cfg.type }}.yml
     - name: Execute setup database commands
       become: true
@@ -12,18 +12,18 @@
       block:
         - name: Execute database init
           ansible.builtin.command:
-            cmd: "{{ mattermost_home }}/bin/mattermost db init"
-            chdir: "{{ mattermost_home }}"
-            creates: "{{ mattermost_home }}/mattermost_db_init"
-        - name: Create db init command execule file
+            cmd: "{{ mattermost_root }}/bin/mattermost db init"
+            chdir: "{{ mattermost_root }}"
+            creates: "{{ mattermost_root }}/mattermost_db_init"
+        - name: Create db init command execute file
           ansible.builtin.file:
-            path: "{{ mattermost_home }}/mattermost_db_init"
+            path: "{{ mattermost_root }}/mattermost_db_init"
             state: touch
             mode: "0644"
             access_time: preserve
             modification_time: preserve
         - name: Execute database migrate
           ansible.builtin.command:
-            cmd: "{{ mattermost_home }}/bin/mattermost db migrate"
-            chdir: "{{ mattermost_home }}"
+            cmd: "{{ mattermost_root }}/bin/mattermost db migrate"
+            chdir: "{{ mattermost_root }}"
           when: update_mattermost is changed
