@@ -37,8 +37,8 @@ type: postgres
 host: localhost  
 port: 5432  
 name: mattermost_test  
-user: mmuser  
-password: mostest  
+user: mattermost_test_user  
+password: mattermost_test_password  
 encoding: utf8  
 additional_params:  
 - "sslmode=disable"  
@@ -51,8 +51,8 @@ type: mysql
 host: localhost  
 port: 3306  
 name: mattermost_test  
-user: mmuser  
-password: mostest  
+user: mattermost_test_user  
+password: mattermost_test_password  
 encoding: utf8mb4  
 collation: utf8mb4_general_ci  
 additional_params:  
@@ -91,8 +91,6 @@ Mattermostの設定
 #### `mattermost_user`
 
 #### `mattermost_group`
-
-#### `mattermost_home`
 
 #### `mattermost_root`
 
